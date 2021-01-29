@@ -1,0 +1,206 @@
+Detection result:
+detection_01
+JSON:
+ [
+  {
+    "faceId": "850f57ea-25dd-4400-b25e-e17103934285",
+    "faceRectangle": {
+      "top": 316,
+      "left": 211,
+      "width": 590,
+      "height": 590
+    },
+    "faceAttributes": {
+      "hair": {
+        "bald": 0.24,
+        "invisible": false,
+        "hairColor": [
+          {
+            "color": "brown",
+            "confidence": 0.97
+          },
+          {
+            "color": "black",
+            "confidence": 0.96
+          },
+          {
+            "color": "other",
+            "confidence": 0.17
+          },
+          {
+            "color": "gray",
+            "confidence": 0.17
+          },
+          {
+            "color": "blond",
+            "confidence": 0.15
+          },
+          {
+            "color": "red",
+            "confidence": 0.12
+          },
+          {
+            "color": "white",
+            "confidence": 0.0
+          }
+        ]
+      },
+      "smile": 1.0,
+      "headPose": {
+        "pitch": -0.2,
+        "roll": 1.2,
+        "yaw": -9.9
+      },
+      "gender": "female",
+      "age": 30.0,
+      "facialHair": {
+        "moustache": 0.0,
+        "beard": 0.0,
+        "sideburns": 0.0
+      },
+      "glasses": "NoGlasses",
+      "makeup": {
+        "eyeMakeup": true,
+        "lipMakeup": true
+      },
+      "emotion": {
+        "anger": 0.0,
+        "contempt": 0.0,
+        "disgust": 0.0,
+        "fear": 0.0,
+        "happiness": 1.0,
+        "neutral": 0.0,
+        "sadness": 0.0,
+        "surprise": 0.0
+      },
+      "occlusion": {
+        "foreheadOccluded": false,
+        "eyeOccluded": false,
+        "mouthOccluded": false
+      },
+      "accessories": [],
+      "blur": {
+        "blurLevel": "high",
+        "value": 0.81
+      },
+      "exposure": {
+        "exposureLevel": "goodExposure",
+        "value": 0.7
+      },
+      "noise": {
+        "noiseLevel": "low",
+        "value": 0.0
+      }
+    },
+    "faceLandmarks": {
+      "pupilLeft": {
+        "x": 395.0,
+        "y": 482.0
+      },
+      "pupilRight": {
+        "x": 646.8,
+        "y": 475.7
+      },
+      "noseTip": {
+        "x": 480.8,
+        "y": 626.6
+      },
+      "mouthLeft": {
+        "x": 375.5,
+        "y": 751.2
+      },
+      "mouthRight": {
+        "x": 630.5,
+        "y": 748.5
+      },
+      "eyebrowLeftOuter": {
+        "x": 300.7,
+        "y": 432.2
+      },
+      "eyebrowLeftInner": {
+        "x": 448.3,
+        "y": 430.3
+      },
+      "eyeLeftOuter": {
+        "x": 346.7,
+        "y": 488.6
+      },
+      "eyeLeftTop": {
+        "x": 388.6,
+        "y": 463.1
+      },
+      "eyeLeftBottom": {
+        "x": 388.5,
+        "y": 502.7
+      },
+      "eyeLeftInner": {
+        "x": 430.5,
+        "y": 485.8
+      },
+      "eyebrowRightInner": {
+        "x": 553.1,
+        "y": 419.4
+      },
+      "eyebrowRightOuter": {
+        "x": 748.1,
+        "y": 426.0
+      },
+      "eyeRightInner": {
+        "x": 589.9,
+        "y": 484.2
+      },
+      "eyeRightTop": {
+        "x": 633.7,
+        "y": 454.1
+      },
+      "eyeRightBottom": {
+        "x": 639.6,
+        "y": 500.6
+      },
+      "eyeRightOuter": {
+        "x": 685.1,
+        "y": 477.7
+      },
+      "noseRootLeft": {
+        "x": 466.8,
+        "y": 487.9
+      },
+      "noseRootRight": {
+        "x": 535.0,
+        "y": 487.3
+      },
+      "noseLeftAlarTop": {
+        "x": 437.5,
+        "y": 589.9
+      },
+      "noseRightAlarTop": {
+        "x": 548.1,
+        "y": 588.2
+      },
+      "noseLeftAlarOutTip": {
+        "x": 417.3,
+        "y": 638.9
+      },
+      "noseRightAlarOutTip": {
+        "x": 572.4,
+        "y": 641.4
+      },
+      "upperLipTop": {
+        "x": 495.5,
+        "y": 734.4
+      },
+      "upperLipBottom": {
+        "x": 496.8,
+        "y": 760.6
+      },
+      "underLipTop": {
+        "x": 496.0,
+        "y": 769.8
+      },
+      "underLipBottom": {
+        "x": 494.7,
+        "y": 796.0
+      }
+    }
+  }
+]

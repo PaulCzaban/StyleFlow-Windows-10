@@ -31,8 +31,8 @@ square_size = 100
 attr_degree_list = [1.5, 2.5, 1., 1., 2, 1.7,0.93, 1.]
 
 
-min_dic = {'Gender': 0, 'Glasses': 0, 'Yaw': -20, 'Pitch': -20, 'Baldness': 0, 'Beard': 0.0, 'Age': 0, 'Expression': 0}
-max_dic = {'Gender': 1, 'Glasses': 1, 'Yaw': 20, 'Pitch': 20, 'Baldness': 1, 'Beard': 1, 'Age': 65, 'Expression': 1}
+min_dic = {'Gender': -1, 'Glasses': -0.5, 'Yaw': -55, 'Pitch': -30, 'Baldness': 0, 'Beard': 0.0, 'Age': 0, 'Expression': -5}
+max_dic = {'Gender': 1.5, 'Glasses': 5, 'Yaw': 55, 'Pitch': 30, 'Baldness': 2.5, 'Beard': 2, 'Age': 210, 'Expression': 4}
 attr_interval = 80
 interval_dic = {'Gender': attr_interval, 'Glasses': attr_interval, 'Yaw': attr_interval, 'Pitch': attr_interval,
                 'Baldness': attr_interval, 'Beard': attr_interval, 'Age': attr_interval, 'Expression': attr_interval}
@@ -75,20 +75,20 @@ class Ui_Form(QWidget):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.setWindowTitle("Let's Party StyleFlow")
-        Form.resize(2784, 1566)
-
+        Form.resize(2560, 1080)
+            
 
         self.graphicsView = QtWidgets.QGraphicsView(self)
-        self.graphicsView.setGeometry(QtCore.QRect(150, 150, 1028, 1028))
+        self.graphicsView.setGeometry(QtCore.QRect(150, 10, 1028, 1028))
         self.graphicsView.setObjectName("graphicsView")
 
         self.lockView = QtWidgets.QGraphicsView(self)
-        self.lockView.setGeometry(QtCore.QRect(150, 150, 1028, 1028))
+        self.lockView.setGeometry(QtCore.QRect(150, 10, 1028, 1028))
         self.lockView.setObjectName("lockView")
 
 
         self.resultView = QtWidgets.QGraphicsView(self)
-        self.resultView.setGeometry(QtCore.QRect(1324 - 50, 150, 1028, 1028))
+        self.resultView.setGeometry(QtCore.QRect(1124 - 50, 10, 1028, 1028))
         self.resultView.setObjectName("blendingView")
 
 
@@ -103,33 +103,33 @@ class Ui_Form(QWidget):
         self.add_intermediate_results_button(Form)
         self.add_Parameters_widgets(Form)
         self.add_lighting_widgets(Form)
-
+        
         QtCore.QMetaObject.connectSlotsByName(self)
 
 
     def add_tool_buttons(self, Form):
-        KaustLogo = QtWidgets.QLabel(self)
-        KaustLogo.setPixmap(QPixmap('icons/1999780_200.png').scaled(90, 90))
-        KaustLogo.setGeometry(QtCore.QRect(int(Lb_x - 1 * Lb_row_shift - 60), 25, 110, 110))
+        #KaustLogo = QtWidgets.QLabel(self)
+        #KaustLogo.setPixmap(QPixmap('icons/1999780_200.png').scaled(90, 90))
+        #KaustLogo.setGeometry(QtCore.QRect(int(Lb_x - 1 * Lb_row_shift - 60), 10, 110, 110))
 
         self.newButton = QtWidgets.QPushButton(Form)
-        self.newButton.setGeometry(QtCore.QRect(int(Lb_x - 1 * Lb_row_shift - 60), 150, square_size, square_size))
+        self.newButton.setGeometry(QtCore.QRect(int(Lb_x - 1 * Lb_row_shift - 60), 10, square_size, square_size))
         self.newButton.setObjectName("openButton")
         self.newButton.setIcon(QIcon('icons/add_new_document.png'))
         self.newButton.setIconSize(QSize(square_size, square_size))
-        # self.newButton.clicked.connect(Form.run_deep_model)
+        #self.newButton.clicked.connect(Form.run_deep_model)
 
         self.openButton = QtWidgets.QPushButton(Form)
         self.openButton.setGeometry(
-            QtCore.QRect(int(Lb_x - 1 * Lb_row_shift - 60), 150 + square_size * 1 + 25 * 1, square_size, square_size))
+            QtCore.QRect(int(Lb_x - 1 * Lb_row_shift - 60), 10 + square_size * 1 + 25 * 1, square_size, square_size))
         self.openButton.setObjectName("openButton")
         self.openButton.setIcon(QIcon('icons/open.png'))
         self.openButton.setIconSize(QSize(square_size, square_size))
-        # self.openButton.clicked.connect(Form.open)
+        self.openButton.clicked.connect(Form.open)
 
         self.fillButton = QtWidgets.QPushButton(Form)
         self.fillButton.setGeometry(
-            QtCore.QRect(int(Lb_x - 1 * Lb_row_shift - 60), 150 + square_size * 2 + 25 * 2, square_size, square_size))
+            QtCore.QRect(int(Lb_x - 1 * Lb_row_shift - 60), 10 + square_size * 2 + 25 * 2, square_size, square_size))
         self.fillButton.setObjectName("fillButton")
         self.fillButton.setIcon(QIcon('icons/paint_can.png'))
         self.fillButton.setIconSize(QSize(square_size, square_size))
@@ -137,7 +137,7 @@ class Ui_Form(QWidget):
 
         self.brushButton = QtWidgets.QPushButton(Form)
         self.brushButton.setGeometry(
-            QtCore.QRect(int(Lb_x - 1 * Lb_row_shift - 60), 150 + square_size * 3 + 25 * 3, square_size, square_size))
+            QtCore.QRect(int(Lb_x - 1 * Lb_row_shift - 60), 10 + square_size * 3 + 25 * 3, square_size, square_size))
         self.brushButton.setObjectName("brushButton")
         self.brushButton.setIcon(QIcon('icons/foot2.png'))
         self.brushButton.setIconSize(QSize(square_size, square_size))
@@ -146,7 +146,7 @@ class Ui_Form(QWidget):
 
         self.undoButton = QtWidgets.QPushButton(Form)
         self.undoButton.setGeometry(
-            QtCore.QRect(int(Lb_x - 1 * Lb_row_shift - 60), 150 + square_size * 4 + 25 * 4, square_size, square_size))
+            QtCore.QRect(int(Lb_x - 1 * Lb_row_shift - 60), 10 + square_size * 4 + 25 * 4, square_size, square_size))
         self.undoButton.setObjectName("undolButton")
         self.undoButton.setIcon(QIcon('icons/undo.png'))
         self.undoButton.setIconSize(QSize(square_size, square_size))
@@ -154,7 +154,7 @@ class Ui_Form(QWidget):
 
         self.saveButton = QtWidgets.QPushButton(Form)
         self.saveButton.setGeometry(
-            QtCore.QRect(int(Lb_x - 1 * Lb_row_shift - 60), 150 + square_size * 5 + 25 * 5, square_size, square_size))
+            QtCore.QRect(int(Lb_x - 1 * Lb_row_shift - 60), 10 + square_size * 5 + 25 * 5, square_size, square_size))
         self.saveButton.setObjectName("saveButton")
         self.saveButton.setIcon(QIcon('icons/reset1.png'))
         self.saveButton.setIconSize(QSize(square_size, square_size))
@@ -215,7 +215,7 @@ class Ui_Form(QWidget):
 
         self.formGroupBox1 = QtWidgets.QGroupBox("Attributes", Form)
         #self.formGroupBox1.setGeometry(QtCore.QRect(2350, 150, 300, 200))
-        self.formGroupBox1.setGeometry(QtCore.QRect(2350-4, 130 +2, 400, 550))
+        self.formGroupBox1.setGeometry(QtCore.QRect(2110, 10, 400, 550))
         formlayout1 = QtWidgets.QFormLayout()
 
         formlayout1.setFormAlignment(Qt.AlignCenter)
@@ -287,7 +287,7 @@ class Ui_Form(QWidget):
 
         self.formGroupBox2 = QtWidgets.QGroupBox("Lighting", Form)
         #self.formGroupBox1.setGeometry(QtCore.QRect(2350, 150, 300, 200))
-        self.formGroupBox2.setGeometry(QtCore.QRect(2350-4, 800 + 20 + 4, 400, 350))
+        self.formGroupBox2.setGeometry(QtCore.QRect(2110, 560 + 20 + 4, 400, 350))
         formlayout2 = QtWidgets.QFormLayout()
 
         formlayout2.setFormAlignment(Qt.AlignCenter)

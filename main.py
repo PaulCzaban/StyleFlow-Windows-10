@@ -54,10 +54,7 @@ class Ex(Ui_Form):
         self.his_image = []
         self.at_intial_point = False
 
-        self.keep_indexes = [2, 5, 25, 28, 16, 32, 33, 34, 55, 75, 79, 162, 177, 196, 160, 212, 246, 285, 300, 329, 362,
-                             369, 462, 460, 478, 551, 583, 643, 879, 852, 914, 999, 976, 627, 844, 237, 52, 301,
-                             599]
-        # self.keep_indexes = [i for i in range(0,100)]
+        self.keep_indexes = [i for i in range(0,100)]
         # self.keep_indexes = [0]
         self.keep_indexes = np.array(self.keep_indexes).astype(np.int)
 
@@ -163,6 +160,7 @@ class Ex(Ui_Form):
                      QImage.Format_RGB888)
 
         showedImagePixmap = QPixmap.fromImage(qim)
+        
         # showedImagePixmap = showedImagePixmap.scaled(QSize(256, 256), Qt.IgnoreAspectRatio)
         self.GT_scene.reset()
         if len(self.GT_scene.items()) > 0:
@@ -302,6 +300,26 @@ class Ex(Ui_Form):
         else:
             pass
 
+    def open(self):
+
+        raw_w['Latent'][000][0] = np.load('data/DW.npy')
+
+
+
+        custom_img = cv2.imread("face.jpg")
+        dim = (1024, 1024)
+        custom_img = cv2.resize(custom_img, dim, interpolation = cv2.INTER_AREA)      
+
+        self.GAN_image = custom_img
+        self.update_real_scene()
+        self.update_GT_scene_image()
+
+        sess = tf.get_default_session()
+        with sess.as_default():
+
+            self.real_scene_update.emit(True)
+
+
     def reset_Wspace(self):
 
         self.update_GT_scene_image()
@@ -309,6 +327,11 @@ class Ex(Ui_Form):
     def init_data_points(self):
 
         self.raw_w = pickle.load(open("data/sg2latents.pickle", "rb"))
+        self.raw_w['Latent'][0][0] = np.load('data/DW.npy')
+        self.raw_w['Latent'][1][0] = np.load('data/JS.npy')
+        self.raw_w['Latent'][2][0] = np.load('data/RC.npy')
+        self.raw_w['Latent'][3][0] = np.load('data/van.npy')
+        self.raw_w['Latent'][4][0] = np.load('data/LT.npy')
 
         self.raw_TSNE = np.load('data/TSNE.npy')
 
@@ -320,6 +343,37 @@ class Ex(Ui_Form):
         self.all_w = np.array(self.raw_w['Latent'])[self.keep_indexes]
         self.all_attr = self.raw_attr[self.keep_indexes]
         self.all_lights = self.raw_lights[self.keep_indexes]
+
+        #0
+        self.all_attr[0][0][0] = 0      #Gender
+        self.all_attr[0][1][0] = 0      #Glasses
+        self.all_attr[0][2][0] = -1.5   #Yaw
+        self.all_attr[0][3][0] = -9.2   #Pitch
+        self.all_attr[0][4][0] = 0.02   #Baldness
+        self.all_attr[0][5][0] = 0      #Beard
+        self.all_attr[0][6][0] = 25     #Age
+        self.all_attr[0][7][0] = 3      #Expresion
+
+        #1
+        self.all_attr[1][0][0] = 0      #Gender
+        self.all_attr[1][1][0] = 0      #Glasses
+        self.all_attr[1][2][0] = -9.9   #Yaw
+        self.all_attr[1][3][0] = -0.2   #Pitch
+        self.all_attr[1][4][0] = 0.24   #Baldness
+        self.all_attr[1][5][0] = 0      #Beard
+        self.all_attr[1][6][0] = 30     #Age
+        self.all_attr[1][7][0] = 1      #Expresion
+
+
+        #3
+        self.all_attr[3][0][0] = 0      #Gender
+        self.all_attr[3][1][0] = 0      #Glasses
+        self.all_attr[3][2][0] = -5.1   #Yaw
+        self.all_attr[3][3][0] = -5.1   #Pitch
+        self.all_attr[3][4][0] = 0.5    #Baldness
+        self.all_attr[3][5][0] = 0      #Beard
+        self.all_attr[3][6][0] = 29     #Age
+        self.all_attr[3][7][0] = 1      #Expresion
 
         light0 = torch.from_numpy(self.raw_lights2[8]).type(torch.FloatTensor).cuda()
         light1 = torch.from_numpy(self.raw_lights2[33]).type(torch.FloatTensor).cuda()
@@ -334,9 +388,14 @@ class Ex(Ui_Form):
 
         self.map = np.ones([1024, 1024, 3], np.uint8) * 255
 
+        count = 0
         for point in self.X_samples:
             ######### don't use np.uint8 in tuple((point*1024).astype(int))
-            cv2.circle(self.map, tuple((point * 1024).astype(int)), 6, (0, 0, 255), -1)
+            if count < 5:
+                cv2.circle(self.map, tuple((point * 1024).astype(int)), 7, (0, 0, 100), -1)
+            else:
+                cv2.circle(self.map, tuple((point * 1024).astype(int)), 6, (0, 0, 255), -1)
+            count = count + 1
 
         self.nbrs = NearestNeighbors(n_neighbors=1, algorithm='ball_tree').fit(self.X_samples)
 
